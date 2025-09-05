@@ -1,8 +1,7 @@
-package org.example;
+package org.example.parkinglot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author amanjain

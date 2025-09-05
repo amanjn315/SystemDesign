@@ -1,4 +1,4 @@
-package org.example;
+package org.example.parkinglot;
 
 import java.util.stream.Collectors;
 
