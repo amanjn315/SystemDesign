@@ -42,13 +42,20 @@ public class BoardService {
         board = new Board(snakes, ladders, players);
 
         int currPlayer = 0;
+        List<Integer> numOfPlayersInContest = new ArrayList<>();
+        for(int i = 0; i < numOfPlayers; i++){
+            numOfPlayersInContest.add(i);
+        }
         while(true){
-            int diceRoll = ThreadLocalRandom.current().nextInt(1, 7);
-            boolean gameOver = board.movePlayer(currPlayer, diceRoll);
-            if(gameOver) break;
+            int diceRollOne = ThreadLocalRandom.current().nextInt(1, 7);
+            int diceRollTwo = ThreadLocalRandom.current().nextInt(1, 7);
+            if(board.movePlayer(numOfPlayersInContest.get(currPlayer), diceRollOne + diceRollTwo)){
+                numOfPlayersInContest.remove(currPlayer);
+                if(numOfPlayersInContest.size() == 1) break;
+            }
 
             currPlayer += 1;
-            currPlayer %= numOfPlayers;
+            currPlayer %= numOfPlayersInContest.size();
         }
     }
 }

@@ -46,6 +46,7 @@ public class Board {
         System.out.printf("%s rolled a %d and moved from %d to %d\n", player.getName(), value, currPos, finalPos);
         if(finalPos == 100) {
             System.out.printf("%s wins the game", player.getName());
+            System.out.println();
             return true;
         }
         return false;
