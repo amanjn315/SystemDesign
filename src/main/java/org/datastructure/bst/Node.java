@@ -1,4 +1,4 @@
-package org.datastructure;
+package org.datastructure.bst;
 
 /**
  * @author amanjain
