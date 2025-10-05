@@ -43,4 +43,8 @@ public class BookCopy {
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
+
+    public int getRackId() {
+        return rackId;
+    }
 }

@@ -36,13 +36,20 @@ public class Rack {
         return bookCopies.containsKey(bookCopyId);
     }
 
-    public void addBook(Book book, String bookCopyId){
+    public BookCopy addBook(Book book, String bookCopyId){
         BookCopy bookCopy = new BookCopy(book, bookCopyId, this.id, null, null);
         bookCopies.put(bookCopyId, bookCopy);
+        return bookCopy;
     }
 
     public BookCopy removeBookCopy(String bookCopyId){
         BookCopy bookCopy = bookCopies.get(bookCopyId);
+        for(Author author : bookCopy.getBook().getAuthors()){
+            author.removeBook(bookCopy.getBook());
+        }
+        for(Publisher publisher : bookCopy.getBook().getPublishers()){
+            publisher.removeBook(bookCopy.getBook());
+        }
         bookCopies.remove(bookCopyId);
         return bookCopy;
     }
@@ -50,6 +57,12 @@ public class Rack {
     public BookCopy removeByBookId(String bookId){
         for(BookCopy bookCopy : bookCopies.values()){
             if(bookCopy.getBook().getBookId().equals(bookId)){
+                for(Author author : bookCopy.getBook().getAuthors()){
+                    author.removeBook(bookCopy.getBook());
+                }
+                for(Publisher publisher : bookCopy.getBook().getPublishers()){
+                    publisher.removeBook(bookCopy.getBook());
+                }
                 removeBookCopy(bookCopy.getId());
                 return bookCopy;
             }
@@ -58,4 +71,12 @@ public class Rack {
         return null;
     }
 
+    public BookCopy getBookCopyByBookId(String bookId){
+        for(BookCopy bookCopy : bookCopies.values()){
+            if(bookCopy.getBook().getBookId().equals(bookId)){
+                return bookCopy;
+            }
+        }
+        return null;
+    }
 }

@@ -15,7 +15,13 @@ public class Book {
         this.bookId = bookId;
         this.title = title;
         this.authors = authors;
+        for(Author author : authors){
+            author.addBook(this);
+        }
         this.publishers = publishers;
+        for(Publisher publisher : publishers){
+            publisher.addBooks(this);
+        }
     }
 
     public String getBookId() {
