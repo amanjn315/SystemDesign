@@ -24,7 +24,7 @@ public class Cache {
         if(node == null){
             return null;
         }
-        linkedList.appendToFront(node);
+        linkedList.moveToFront(node);
         return node.results;
     }
 
