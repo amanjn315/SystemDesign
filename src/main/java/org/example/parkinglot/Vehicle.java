@@ -1,28 +1,21 @@
 package org.example.parkinglot;
 
 /**
- * @author amanjain
- **/
-public class Vehicle {
-    private final VehicleType type;
-    private final String registrationNumber;
-    private final String color;
+@author amanjain
+**/public abstract class Vehicle {
+    private final int vehicleId;
+    private final VehicleType vehicleType;
 
-    public Vehicle(VehicleType type, String registrationNumber, String color) {
-        this.type = type;
-        this.registrationNumber = registrationNumber;
-        this.color = color;
+    public Vehicle(int vehicleId, VehicleType vehicleType, ParkingTicket parkingTicket){
+        this.vehicleId = vehicleId;
+        this.vehicleType = vehicleType;
     }
 
-    public VehicleType getType() {
-        return type;
+    public VehicleType getVehicleType(){
+        return this.vehicleType;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public String getColor() {
-        return color;
+    public int getVehicleId(){
+        return this.vehicleId;
     }
 }

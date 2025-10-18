@@ -1,36 +1,56 @@
 package org.example.parkinglot;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 /**
  * @author amanjain
  **/
 public class ParkingFloor {
-    private int floorId;
-    List<ParkingSlot> slots;
+    private final int floorId;
+    private Map<Integer, ParkingSpot> parkingSpotMap;
 
-    public ParkingFloor(int floorId, int numSlots) {
+    private Queue<ParkingSpot> availableSmallSpots;
+    private Queue<ParkingSpot> availableMediumSpots;
+    private Queue<ParkingSpot> availableLargeSpots;
+
+    public ParkingFloor(int floorId) {
         this.floorId = floorId;
-        this.slots = new ArrayList<>(numSlots);
-        initialiseSlots(numSlots);
     }
 
-    void initialiseSlots(int numSlots){
-        slots.add(new ParkingSlot(this.floorId, 1, VehicleType.TRUCK));
-        slots.add(new ParkingSlot(this.floorId, 2, VehicleType.BIKE));
-        slots.add(new ParkingSlot(this.floorId, 3, VehicleType.BIKE));
-
-        for(int i = 4; i <= numSlots; i++){
-            slots.add(new ParkingSlot(this.floorId, i, VehicleType.CAR));
+    public ParkingSpot findAndOccupySpot(VehicleType vehicleType) {
+        // Logic becomes much faster, O(1) for finding a spot
+        switch (vehicleType) {
+            case MOTORCYCLE:
+                if(!availableSmallSpots.isEmpty()){
+                    return availableSmallSpots.poll();
+                }
+                break;
+            case CAR:
+                if(!availableMediumSpots.isEmpty()){
+                    return availableMediumSpots.poll();
+                }
+                break;
+            case TRUCK:
+                if(!availableLargeSpots.isEmpty()){
+                    return availableLargeSpots.poll();
+                }
+                break;
         }
+        return null; // if no spot found
     }
 
-    public List<ParkingSlot> getSlots(){
-        return slots;
-    }
-
-    public int getFloorId(){
-        return floorId;
+    public void freeSpot(ParkingSpot spot) {
+        spot.removeVehicle();
+        switch (spot.getParkingSpotType()) {
+            case MOTORCYCLE:
+                availableSmallSpots.add(spot);
+                break;
+            case CAR:
+                availableMediumSpots.add(spot);
+                break;
+            case TRUCK:
+                availableLargeSpots.add(spot);
+        }
     }
 }
