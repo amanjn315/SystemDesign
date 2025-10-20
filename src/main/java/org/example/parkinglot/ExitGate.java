@@ -1,6 +1,7 @@
 package org.example.parkinglot;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * @author amanjain
@@ -13,6 +14,9 @@ public class ExitGate extends Gate {
     }
 
     public void processExit(ParkingTicket ticket) {
+
+        ticket.setExitTime(LocalDateTime.now());
+
         // 1. Calculate fee
         BigDecimal fee = feeCalculator.calculateFee(ticket);
         System.out.println("Parking fee is: $" + fee);

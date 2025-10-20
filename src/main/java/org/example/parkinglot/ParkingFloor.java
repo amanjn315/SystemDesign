@@ -1,5 +1,7 @@
 package org.example.parkinglot;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
@@ -16,6 +18,37 @@ public class ParkingFloor {
 
     public ParkingFloor(int floorId) {
         this.floorId = floorId;
+        parkingSpotMap = new HashMap<>();
+        availableSmallSpots = new LinkedList<>();
+        availableMediumSpots = new LinkedList<>();
+        availableLargeSpots = new LinkedList<>();
+    }
+
+    public void parkingFloorSummary(){
+        System.out.println("Parking Floor id: [" + this.floorId + "]:");
+        for(ParkingSpot parkingSpot : parkingSpotMap.values()){
+            parkingSpot.parkingSpotSummary();
+        }
+    }
+
+    public int getFloorId(){
+        return this.floorId;
+    }
+
+    public boolean addParkingSpot(ParkingSpot parkingSpot){
+        if(parkingSpotMap.containsKey(parkingSpot.getId())){
+            System.out.println("Parking spot with id [" + parkingSpot.getId() + "] already exist in the parking lot");
+            return false;
+        }
+        parkingSpotMap.put(parkingSpot.getId(), parkingSpot);
+        if(parkingSpot.getParkingSpotType() == VehicleType.MOTORCYCLE){
+            availableSmallSpots.add(parkingSpot);
+        } else if(parkingSpot.getParkingSpotType() == VehicleType.CAR){
+            availableMediumSpots.add(parkingSpot);
+        } else {
+            availableLargeSpots.add(parkingSpot);
+        }
+        return true;
     }
 
     public ParkingSpot findAndOccupySpot(VehicleType vehicleType) {

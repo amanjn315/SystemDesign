@@ -1,11 +1,31 @@
 package org.example.parkinglot;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
 @author amanjain
 **/public class ParkingLot {
     Map<Integer, ParkingFloor> parkingFloorMap;
+
+    public ParkingLot(){
+        parkingFloorMap = new HashMap<>();
+    }
+
+    public void parkingLotSummary(){
+        for(ParkingFloor parkingFloor : parkingFloorMap.values()){
+            parkingFloor.parkingFloorSummary();
+        }
+    }
+
+    public boolean addParkingFloor(ParkingFloor parkingFloor){
+        if(parkingFloorMap.containsKey(parkingFloor.getFloorId())){
+            System.out.println("Parking floor with id [" + parkingFloor.getFloorId() + "] already exist in the parking lot");
+            return false;
+        }
+        parkingFloorMap.put(parkingFloor.getFloorId(), parkingFloor);
+        return true;
+    }
 
     public ParkingTicket parkVehicle(Vehicle vehicle) {
         ParkingSpot spot = findBestAvailableSpot(vehicle.getVehicleType());

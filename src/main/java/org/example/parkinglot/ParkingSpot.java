@@ -43,4 +43,12 @@ public class ParkingSpot {
     public int getId(){
         return this.id;
     }
+
+    public void parkingSpotSummary(){
+        if(vehicle != null){
+            System.out.println("Parking spot id [" + this.id + "] is of vehicle type [" + this.parkingSpotType + "] is occupied by vehicle [" + vehicle.getVehicleId() + "]");
+        } else {
+            System.out.println("Parking spot id [" + this.id + "] is of vehicle type [" + this.parkingSpotType + "] is current unoccupied");
+        }
+    }
 }
