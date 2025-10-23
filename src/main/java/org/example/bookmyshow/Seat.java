@@ -13,4 +13,16 @@ public class Seat {
         this.rowNumber = rowNumber;
         this.seatType = seatType;
     }
+
+    public String getSeatId() {
+        return seatId;
+    }
+
+    public int getRowNumber() {
+        return rowNumber;
+    }
+
+    public SeatType getSeatType() {
+        return seatType;
+    }
 }

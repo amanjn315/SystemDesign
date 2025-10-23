@@ -1,5 +1,6 @@
 package org.example.bookmyshow;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Show {
         this.startTime = startTime;
         this.showSeats = new ArrayList<>();
         for(Seat seat : screen.getSeats()){
-            showSeats.add(new ShowSeat(seat));
+            showSeats.add(new ShowSeat(seat.getSeatId(), seat, new BigDecimal(500)));
         }
     }
 
@@ -40,5 +41,14 @@ public class Show {
 
     public List<ShowSeat> getShowSeats() {
         return this.showSeats;
+    }
+
+    public ShowSeat findSeat(String showSeatId) {
+        for(ShowSeat showSeat : showSeats){
+            if(showSeat.getShowSeatId().equals(showSeatId)){
+                return showSeat;
+            }
+        }
+        return null;
     }
 }
