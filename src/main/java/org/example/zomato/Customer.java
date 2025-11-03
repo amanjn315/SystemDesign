@@ -3,5 +3,6 @@ package org.example.zomato;
 /**
  * @author amanjain
  **/
-public class Customer {
+public class Customer extends User {
+
 }

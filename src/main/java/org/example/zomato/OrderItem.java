@@ -12,10 +12,18 @@ public class OrderItem {
     private final int quanity;
     private final BigDecimal priceAtPurchase;
 
-    public OrderItem(String menuItemId, int quanity, BigDecimal priceAtPurchase) {
-        this.menuItemId = menuItemId;
-        this.quanity = quanity;
-        this.priceAtPurchase = priceAtPurchase;
+    public OrderItem(CartItem cartItem) {
+        this.menuItemId = cartItem.getMenuItem().getId();
+        this.quanity = cartItem.getQuantity();
+        this.priceAtPurchase = cartItem.getMenuItem().getPrice();
         this.id = UUID.randomUUID().toString();
+    }
+
+    public int getQuanity() {
+        return quanity;
+    }
+
+    public BigDecimal getPriceAtPurchase() {
+        return priceAtPurchase;
     }
 }
